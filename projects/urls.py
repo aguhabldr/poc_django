@@ -9,8 +9,7 @@ router= routers.DefaultRouter()
 
 router.register('projects', ProjectViewSet, basename="projects")
 router.register('categories', CategoryViewSet,  basename="categories")
-
-# router.register('comments', CommentViewSet)
+router.register('comments', CommentViewSet)
 
 
 urlpatterns = [

@@ -21,6 +21,8 @@
 ## Deactivate and reactivate virtual environment
 
     deactivate && source venv/bin/activate
+## flash the database (SQLite)
+    py manage.py flush
 
 ## Run database migrations
 
