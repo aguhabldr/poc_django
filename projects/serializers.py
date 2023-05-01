@@ -2,7 +2,9 @@ from rest_framework import serializers
 from .models import Project, Comment, Category
 
 
+
 #create serializers here
+
 
 class CategorySerializer(serializers.ModelSerializer):
     id=serializers.ReadOnlyField()    

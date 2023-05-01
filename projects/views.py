@@ -1,12 +1,17 @@
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Project, Comment, Category
+
 from .serializers import ProjectSerializer, CategorySerializer, CommentSerializer
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    
+
     queryset= Project.objects.all()
     serializer_class=ProjectSerializer
 
@@ -30,5 +35,13 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset= Comment.objects.all()
     serializer_class=CommentSerializer
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     UserModel View.
+#     """
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = UserSerializer
+#     queryset = get_user_model().objects.all()
 
 
