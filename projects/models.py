@@ -11,10 +11,20 @@ class Category(models.Model):
         return self.name
 
 class Project(models.Model):
+    ISACTIVE = (
+        ("NEW","NEW"),
+        ("ACTIVATED","ACTIVATED"),
+        ("NOT_ACTIVATED","NOT_ACTIVATED"),
+        ("DONE","DONE") 
+    )
+
     id=models.AutoField(primary_key=True)
     title = models.CharField(max_length=100,unique = True)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    start_date =  models.DateTimeField(null=True)
+    start_date =  models.DateTimeField(null=True)
+    status = models.CharField(max_length=50, choices=ISACTIVE,  default='NEW')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # user = models.ForeignKey(User, on_delete=models.)

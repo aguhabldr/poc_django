@@ -10,7 +10,7 @@ from .models import Project, Comment, Category
 from .serializers import ProjectSerializer, CategorySerializer, CommentSerializer
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    
+    permission_classes = (IsAuthenticated,)
 
     queryset= Project.objects.all()
     serializer_class=ProjectSerializer
