@@ -31,6 +31,10 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+    
+        # def get_num_comments(self):
+    #     # Get the count of comments associated with this project
+    #     return Comment.objects.filter(project=self).count()
 
     # def get_absolute_url(self):
     #      # Return the URL to view this project's detail page

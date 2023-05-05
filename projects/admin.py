@@ -7,7 +7,7 @@ from .models import Comment
 
 # Project Admin
 class ProjectAdmin(admin.ModelAdmin):
-    list_display=('id', 'title','description','category','created_at')
+    list_display=('id', 'title','description','category')
     search_fields=('title',)   
 
 admin.site.register(Project,ProjectAdmin)

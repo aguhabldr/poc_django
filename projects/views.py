@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+
+from django.http.response import JsonResponse
+
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -11,20 +15,26 @@ from .serializers import ProjectSerializer, CategorySerializer, CommentSerialize
 
 class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
-
     queryset= Project.objects.all()
     serializer_class=ProjectSerializer
 
+    #projectss/{projectId}/comments
     @action(detail=True,methods=['get'])
-    def projects(self,request,pk=None):   
-        try:                
+    def comments(self,request,pk=None): 
+        try:
+            print(f"Project id = {pk}")                 
             project=Project.objects.get(pk=pk)
-            return Response(project.data)
+            print(f"project = {project}")     
+            comment=Comment.objects.filter(project=project)
+            emps_serializer=CommentSerializer(comment,many=True,context={'request':request})
+            return Response(emps_serializer.data)
         except Exception as e:
             print(e)
             return Response({
-                'message':'Company might not exists !! Error'
-            })
+                'message':'Comment(s) might not exists !! Error'
+            }) 
+
+
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -36,12 +46,17 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset= Comment.objects.all()
     serializer_class=CommentSerializer
 
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     UserModel View.
-#     """
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = UserSerializer
-#     queryset = get_user_model().objects.all()
+class ProjectCommentViewSet():
+    @action(detail=True, methods=['get'])
+    def getCommentsOnProject(self, pid):       
+       print(f"self = {self} ")
+       print(f"Project id = {pid} ")
+    
+       queryset = Comment.objects.filter(project=pid)
+       comment_serializer = CommentSerializer(queryset, many=True)
+       return JsonResponse(comment_serializer.data, safe=False)
+     
+       
+
 
 
