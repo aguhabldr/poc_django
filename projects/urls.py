@@ -8,14 +8,14 @@ from projects.views import ProjectViewSet, CategoryViewSet, CommentViewSet, Proj
 router= routers.DefaultRouter()
 
 router.register('projects', ProjectViewSet, basename="projects")
-router.register('categories', CategoryViewSet,  basename="categories")
-router.register('comments', CommentViewSet)
+router.register('categories', CategoryViewSet, basename="categories")
+router.register('comments', CommentViewSet, basename="comments")
 
 
 urlpatterns = [
     # ex: /projects/
     path('',include(router.urls)),
-    # path('projects/<int:pid>/comments/',ProjectCommentViewSet.getCommentsOnProject)
+    path('projects/<int:pid>/comments/<int:cid>',ProjectCommentViewSet.getCommentsOnProject)
 
     # path('api/', include('rest_framework.urls', namespace='rest_framework'))
     # path('', views.index),
