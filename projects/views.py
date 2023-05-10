@@ -48,6 +48,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class=CommentSerializer
 
 class ProjectCommentViewSet():
+    permission_classes = (IsAuthenticated,)
     @action(detail=True, methods=['get'])
     def getCommentsOnProject(self, pid, cid):       
        print(f"self = {self} ")
