@@ -34,7 +34,7 @@ jobs:
             doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.CLUSTER_NAME }}
         - name: trigger rollout for deployment
           run: |
-            kubectl rollout restart deployment.apps/alok-django-deployment
+            kubectl rollout restart deployment.apps/alok-test-docker-django-deployment
         - name: Wait for rollout to finish
           run: |
-            kubectl rollout status deployment.apps/alok-django-deployment
+            kubectl rollout status deployment.apps/alok-test-docker-django-deployment
