@@ -12,6 +12,8 @@
 ### Activate the virtual environment
 
     source venv/bin/activate
+## to see all pachange & their versions
+    pip freeze
 
 ## Install python requirements
 

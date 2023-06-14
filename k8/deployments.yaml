@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alok-test-docker-django-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alok-test-docker-django-deployment
+
+  template:
+    metadata:
+      labels:
+        app: alok-test-docker-django-deployment
+    spec:
+      containers:
+        - name: alok-test-docker-django-k8
+          image: aloksguha/alok_test_docker_django:latest
+          ports:
+            - containerPort: 8000
