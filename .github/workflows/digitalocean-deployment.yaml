@@ -29,3 +29,12 @@ jobs:
         - name: Push image
           run: |
             docker push registry.digitalocean.com/alok-django-kops/django-k8s-api --all-tags
+        - name: K8s cluster kubeconfig file with/ short-lived creds
+          run: |
+            doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.CLUSTER_NAME }}
+        - name: trigger rollout for deployment
+          run: |
+            kubectl rollout restart deployment.apps/alok-django-deployment
+        - name: Wait for rollout to finish
+          run: |
+            kubectl rollout status deployment.apps/alok-django-deployment

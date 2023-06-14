@@ -16,5 +16,6 @@ spec:
       containers:
         - name: alok-test-docker-django-k8
           image: aloksguha/alok_test_docker_django:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
