@@ -1,0 +1,34 @@
+name: Django CICD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+    test_django_job:
+      uses: aguhabldr/poc_django/.github/workflows/deployment.yml@main
+    build:
+      runs-on: ubuntu-latest
+      needs: [test_django_job]
+      env:
+        CLUSTER_NAME: django-kops-cluster
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Insall doctl
+          uses: digitalocean/action-doctl@v2
+          with:
+            token: ${{ secrets.DO_API_TOKEN_KEY }}
+        - name: Login to DO Container Registry with short-lived creds
+          run: doctl registry login --expiry-seconds 1200
+        - name: Build container image
+          working-directory: .
+          run: |
+            docker build -f Dockerfile \
+              -t registry.digitalocean.com/alok-django-kops/django-k8s-api:latest \
+              -t registry.digitalocean.com/alok-django-kops/django-k8s-api:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
+              .
+        - name: Push image
+          run: |
+            docker push registry.digitalocean.com/alok-django-kops/django-k8s-api --all-tags
