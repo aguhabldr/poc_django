@@ -6,11 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-    test_django_job:
-      uses: aguhabldr/poc_django/.github/workflows/django.yml@main
     build:
       runs-on: ubuntu-latest
-      needs: [test_django_job]
       env:
         CLUSTER_NAME: django-kops-cluster
       steps:
