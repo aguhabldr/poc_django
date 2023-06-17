@@ -9,7 +9,7 @@ jobs:
     build:
       runs-on: ubuntu-latest
       env:
-        CLUSTER_NAME: django-kops-cluster
+        CLUSTER_NAME: poc-django
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
