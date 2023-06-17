@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-__f+mg086(s-2=w#rf2o4ay#g-$ix1^_in&kshs^#m^i2!^x*@
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = ['https://poc.f2f.one']
 
 # Application definition
 
