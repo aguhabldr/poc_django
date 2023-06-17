@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alok-test-docker-django-deployment
+  name: poc-django-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: alok-test-docker-django-deployment
+      app: poc-django-deployment
 
   template:
     metadata:
       labels:
-        app: alok-test-docker-django-deployment
+        app: poc-django-deployment
     spec:
       containers:
         - name: alok-django-kops
